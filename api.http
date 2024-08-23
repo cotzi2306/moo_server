@@ -1,0 +1,98 @@
+### Obtener información general de un usuario
+GET http://localhost:8080/users/1
+
+### Obtener información completa de un usuario
+GET http://localhost:8080/users/1/details
+
+### Obtener notificaciones por usuario
+GET http://localhost:8080/users/1/notifications
+
+### Ver una notificación en especifico
+GET http://localhost:8080/users/1/notifications/{notificationId}
+
+###Obtener fincas de un usuario
+GET http://localhost:8080/users/1/fincas
+
+### Obtener información de una finca
+GET http://localhost:8080/fincas/1
+
+###Obtener información de los bovinos de una finca 
+GET http://localhost:8080/fincas/1/bovinos
+
+###Obtener información de un bovino 
+GET http://localhost:8080/bovinos/12
+
+###Obtener información de los partos de un bovino
+GET http://localhost:8080/bovinos/1/births
+
+###Obtener información de las inseminaciones de un bovino
+GET http://localhost:8080/bovinos/1/inseminations
+
+###Obtener información de la producción de leche de una finca
+GET http://localhost:8080/fincas/1/production/milk
+
+### Ejemplos de Rutas con Filtros
+### **Producción por Tiempo**
+GET http://localhost:8080/fincas/1/production/cattle?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD
+### **Animales con Filtros** USANDO QUERY PARAMS
+GET http://localhost:8080/fincas/1/bovinos?filter=nombre&order=DESC
+
+### Registrar un bovino
+POST http://localhost:8080/bovinos
+Content-Type: application/json
+
+{
+  "finca_id": 2,
+  "numero": "BOV011",
+  "nombre": "Lolita",
+  "fecha_nacimiento": "2023-03-15",
+  "raza": "Angus",
+  
+  "procedencia": "Finca El Paraíso",
+  "sexo": "hembra",
+  "proposito": "carne",
+  "peso": 500,
+  "ciclo_de_vida": "ternero",
+  "isAlive": true,
+  "sql": "SELECT * FROM usuarios;"
+}
+
+### Editar un bovino
+PATCH  http://localhost:8080/bovinos/3
+Content-Type: application/json
+
+{
+  "isAlive": true
+}
+
+### Registrar un usuario
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "nombre": "Juan Pérez",
+  "email": "juan.perez@example.com",
+  "numero_telefonico": "3001234567",
+  "no_identificacion": "123456789",
+  "ubicacion": "Medellín",
+  "puesto": "Propietario"
+}
+
+### Editar un usuario
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "nombre": "Juan Pérez",
+  "email": "juan.perez@example.com",
+}
+
+### Agregar una finca
+POST http://localhost:8080/fincas?owner=1
+Content-Type: application/json
+
+{
+  "nombre": "Finca La Esperanza",
+  "pais": "Colombia",
+  "estado_departamento": "Antioquia"
+}
