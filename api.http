@@ -1,5 +1,5 @@
 ### Obtener información general de un usuario
-GET http://localhost:8080/users/1
+GET http://localhost:8080/users/3
 
 ### Obtener información completa de un usuario
 GET http://localhost:8080/users/1/details
@@ -14,13 +14,13 @@ GET http://localhost:8080/users/1/notifications/{notificationId}
 GET http://localhost:8080/users/1/fincas
 
 ### Obtener información de una finca
-GET http://localhost:8080/fincas/1
+GET http://localhost:8080/fincas/7
 
 ###Obtener información de los bovinos de una finca 
 GET http://localhost:8080/fincas/1/bovinos
 
 ###Obtener información de un bovino 
-GET http://localhost:8080/bovinos/12
+GET http://localhost:8080/bovinos/13
 
 ###Obtener información de los partos de un bovino
 GET http://localhost:8080/bovinos/1/births
@@ -35,7 +35,7 @@ GET http://localhost:8080/fincas/1/production/milk
 ### **Producción por Tiempo**
 GET http://localhost:8080/fincas/1/production/cattle?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD
 ### **Animales con Filtros** USANDO QUERY PARAMS
-GET http://localhost:8080/fincas/1/bovinos?filter=nombre&order=DESC
+GET http://localhost:8080/fincas/1/bovinos?filter=id&order=DESC
 
 ### Registrar un bovino
 POST http://localhost:8080/bovinos
@@ -43,8 +43,8 @@ Content-Type: application/json
 
 {
   "finca_id": 2,
-  "numero": "BOV011",
-  "nombre": "Lolita",
+  "numero": "BOV3320",
+  "nombre": "bovinotry",
   "fecha_nacimiento": "2023-03-15",
   "raza": "Angus",
   
@@ -58,11 +58,11 @@ Content-Type: application/json
 }
 
 ### Editar un bovino
-PATCH  http://localhost:8080/bovinos/3
+PATCH  http://localhost:8080/bovinos/1
 Content-Type: application/json
 
 {
-  "isAlive": true
+  "isAlive": false
 }
 
 ### Registrar un usuario
@@ -71,15 +71,18 @@ Content-Type: application/json
 
 {
   "nombre": "Juan Pérez",
-  "email": "juan.perez@example.com",
+  "email": "juan.prperez@example.com",
   "numero_telefonico": "3001234567",
+  "contrasena" : "contrasena",
   "no_identificacion": "123456789",
   "ubicacion": "Medellín",
+  "rol" : "Usuario",
   "puesto": "Propietario"
+  
 }
 
 ### Editar un usuario
-POST http://localhost:8080/users
+PATCH http://localhost:8080/users
 Content-Type: application/json
 
 {
@@ -88,11 +91,19 @@ Content-Type: application/json
 }
 
 ### Agregar una finca
-POST http://localhost:8080/fincas?owner=1
+POST http://localhost:8080/fincas
 Content-Type: application/json
 
 {
-  "nombre": "Finca La Esperanza",
+  "nombre": "Finca La Pera",
   "pais": "Colombia",
   "estado_departamento": "Antioquia"
+} 
+
+### Editar un bovino
+PATCH  http://localhost:8080/fincas/8
+Content-Type: application/json
+
+{
+  "nombre" : "Finca 8"
 }

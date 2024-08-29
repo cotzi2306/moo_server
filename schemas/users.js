@@ -5,12 +5,12 @@ const userSchema = z.object({
         required_error: 'Nombre is required'
     }), 
     email: z.string().email(),
-    numero_telefono: z.string(),
+    numero_telefonico: z.string(),
     contrasena: z.string(),
     no_identificacion: z.string(),
     ubicacion: z.string().optional(),
     rol: z.enum(['Admin', 'Usuario', 'Gestor']),
-    puesto: z.string(),
+    puesto: z.string()
 })
 
 export function validateUser(object){
