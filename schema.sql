@@ -49,6 +49,27 @@ CREATE TABLE usuario_finca (
 );
 
 
+-- Agregar usuarios 
+INSERT INTO usuarios (nombre, email, numero_telefonico, contrasena, no_identificacion, ubicacion, rol, puesto)
+VALUES ('Julian Hernandez', 'julianh@example.com', '31234123890', 'hashed_password', '1003454656', 'Cundinamarca', 'Admin', 'Propietario'),
+('Mario García', 'mario.g@example.com', '31234567890', 'hashed_password', '1003456656', 'Bogotá', 'Admin', 'Propietario'),
+('Julian Hernandez', 'julianh@example.com', '31234123890', 'hashed_password', '1003454656', 'Cundinamarca', 'Admin', 'Propietario');
+
+-- Agregar fincas
+INSERT INTO finca (nombre, pais, estado_departamento) VALUES 
+('Finca Valle del Sol', 'Colombia', 'Antioquia'),
+('Finca La Esperanza', 'Colombia', 'Antioquia'),
+('Finca El Manzano', 'Colombia', 'Bogotá'),
+('Finca Monte Verde', 'Colombia', 'Cundinamarca'),
+('Finca Piedra Blanca', 'Colombia', 'Cundinamarca');
+
+-- Relacionar propietarios con fincas
+INSERT INTO usuario_finca (usuario_id, finca_id) VALUES (1, 1);
+INSERT INTO usuario_finca (usuario_id, finca_id) VALUES (1, 2);
+INSERT INTO usuario_finca (usuario_id, finca_id) VALUES (1, 3); 
+INSERT INTO usuario_finca (usuario_id, finca_id) VALUES (2, 4); 
+INSERT INTO usuario_finca (usuario_id, finca_id) VALUES (2, 5); 
+
 INSERT INTO Bovinos (finca_id, numero, nombre, fecha_nacimiento, raza, id_papa, id_mama, procedencia, sexo, proposito, peso, ciclo_de_vida, isAlive)
 VALUES (1, 'BOV123', 'Ramón', '2023-05-01', 'Charolais', NULL, NULL, 'Finca La Esperanza', 'macho','carne', 600.00, 'ternero', 1);
 
@@ -65,28 +86,6 @@ VALUES
 (3, 'BOV008', 'Ana', '2023-01-30', 'Piedmontese', NULL, NULL, 'Finca La Cabaña', 'hembra', 'leche', 480.00, 'ternero', 1),
 (4, 'BOV009', 'Pedro', '2023-09-05', 'Charolais', NULL, NULL, 'Finca Santa Ana', 'macho', 'carne', 600.00, 'ternero', 1),
 (5, 'BOV010', 'Isabel', '2023-10-15', 'Angus', NULL, NULL, 'Finca El Sol', 'hembra', 'carne', 560.00, 'ternero', 1);
-
-
--- Agregar fincas
-INSERT INTO finca (nombre, pais, estado_departamento) VALUES 
-('Finca Valle del Sol', 'Colombia', 'Antioquia'),
-('Finca La Esperanza', 'Colombia', 'Antioquia'),
-('Finca El Manzano', 'Colombia', 'Bogotá'),
-('Finca Monte Verde', 'Colombia', 'Cundinamarca'),
-('Finca Piedra Blanca', 'Colombia', 'Cundinamarca');
-
--- Agregar usuarios 
-INSERT INTO usuarios (nombre, email, numero_telefonico, contrasena, no_identificacion, ubicacion, rol, puesto)
-VALUES ('Julian Hernandez', 'julianh@example.com', '31234123890', 'hashed_password', '1003454656', 'Cundinamarca', 'Admin', 'Propietario'),
-('Mario García', 'mario.g@example.com', '31234567890', 'hashed_password', '1003456656', 'Bogotá', 'Admin', 'Propietario'),
-('Julian Hernandez', 'julianh@example.com', '31234123890', 'hashed_password', '1003454656', 'Cundinamarca', 'Admin', 'Propietario');
-
--- Relacionar propietarios con fincas
-INSERT INTO usuario_finca (usuario_id, finca_id) VALUES (1, 1);
-INSERT INTO usuario_finca (usuario_id, finca_id) VALUES (1, 2);
-INSERT INTO usuario_finca (usuario_id, finca_id) VALUES (1, 3); 
-INSERT INTO usuario_finca (usuario_id, finca_id) VALUES (2, 4); 
-INSERT INTO usuario_finca (usuario_id, finca_id) VALUES (2, 5); 
 
 -- Fincas por usuario
 SELECT f.*
