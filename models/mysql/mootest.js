@@ -105,6 +105,15 @@ export class fincaModel {
 }
 
 export class userModel {
+
+    static async getByEmail({user}) {
+        const {email, contrasena} = user;
+        
+        const sql = `SELECT nombre, id FROM usuarios WHERE email = ?;`
+        const [row] = await connection.query(sql, [email]);
+    
+        return row
+    }
     static async getUser({id}) {
         try {
             

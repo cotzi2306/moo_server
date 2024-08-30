@@ -65,6 +65,24 @@ Content-Type: application/json
   "isAlive": false
 }
 
+### Agregar una finca
+POST http://localhost:8080/fincas
+Content-Type: application/json
+
+{
+  "nombre": "Finca La Pera",
+  "pais": "Colombia",
+  "estado_departamento": "Antioquia"
+} 
+
+### Editar un bovino
+PATCH  http://localhost:8080/fincas/8
+Content-Type: application/json
+
+{
+  "nombre" : "Finca 8"
+}
+
 ### Registrar un usuario
 POST http://localhost:8080/users
 Content-Type: application/json
@@ -82,7 +100,7 @@ Content-Type: application/json
 }
 
 ### Editar un usuario
-PATCH http://localhost:8080/users
+PATCH http://localhost:8080/users/10
 Content-Type: application/json
 
 {
@@ -90,20 +108,11 @@ Content-Type: application/json
   "email": "juan.perez@example.com",
 }
 
-### Agregar una finca
-POST http://localhost:8080/fincas
+### Iniciar sesión
+POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "nombre": "Finca La Pera",
-  "pais": "Colombia",
-  "estado_departamento": "Antioquia"
-} 
-
-### Editar un bovino
-PATCH  http://localhost:8080/fincas/8
-Content-Type: application/json
-
-{
-  "nombre" : "Finca 8"
+  "email": "juan.prperez@example.com",
+  "contrasena" : "contrasena"
 }

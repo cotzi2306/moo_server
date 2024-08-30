@@ -1,9 +1,13 @@
 import express from 'express';
 import cors from 'cors';
+import jwt from 'jsonwebtoken';
+
 
 import { createBovinosRouter } from './routes/bovinos.js';
 import { createUsersRouter } from './routes/users.js';
 import { createFincasRouter} from './routes/fincas.js';
+import { createAuthRouter } from './routes/auth.js';
+
 
 const corsOptions = {
     origin: "http://localhost:8081",
@@ -83,6 +87,7 @@ export const createApp = ({bovinoModel, userModel, fincaModel }) => {
     app.use('/bovinos', createBovinosRouter ({bovinoModel:bovinoModel}))
     app.use('/users', createUsersRouter ({userModel:userModel}))
     app.use('/fincas', createFincasRouter({fincaModel:fincaModel}))
+    app.use('/auth', createAuthRouter({userModel:userModel}))
 
     const PORT = process.env.PORT ?? 8080
     app.listen(PORT, () =>{
