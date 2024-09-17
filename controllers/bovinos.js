@@ -8,8 +8,12 @@ export class bovinosController {
     }
 
     getBovinobyId = async (req, res) => {
-        const { id } = req.params
+        const { id } = req.params;
+        const { user } = req;
         const cow = await this.bovinoModel.getBovino({ id} );
+        if (!user.fincas.includes(parseInt(cow.finca_id))) {
+            return res.status(401).json({ message: 'No autorizado' });
+        }
         res.status(200).send(cow);
     }
 
@@ -18,6 +22,11 @@ export class bovinosController {
     
         if (result.error){
             return res.status(400).json({error: JSON.parse(result.error.message)})
+        }
+
+        const { user } = req;
+        if (!user.fincas.includes(parseInt(result.data.finca_id))) {
+            return res.status(401).json({ message: 'No autorizado' });
         }
     
         const newBovino = await this.bovinoModel.addBovino({bovino: result.data});

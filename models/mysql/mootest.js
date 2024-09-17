@@ -77,12 +77,14 @@ export class fincaModel {
         return rows;
     }
 
-    static async  addFinca({finca}) {
+    static async  addFinca({usuario, finca}) {
         const { nombre, pais, estado_departamento} = finca;
+        const user = usuario;
     
         const sql = `INSERT INTO finca (nombre, pais, estado_departamento) VALUES (?, ?, ?)`;
         const [result] = await connection.query(sql, [nombre, pais, estado_departamento]);
-    
+        console.log(user.id)
+        const [uf] = await connection.query(`INSERT INTO usuario_finca (usuario_id, finca_id) VALUES (?, ?);`, [user.id, result.insertId])
         return result.insertId;
     }
     
@@ -100,11 +102,35 @@ export class fincaModel {
     
         const [result] = await connection.query(sql,values);
     
-        return getFinca({id})
+        return this.getFinca({id})
+    }
+
+    static async deleteFinca({id}){
+        const fincaId = id;
+
+        const sql = 'DELETE FROM finca WHERE id = ?'
+
+        const [result] = await connection.query(sql, [fincaId]);
+
+        return result;
     }
 }
 
 export class userModel {
+
+    static async getCredentials({user}){
+        const {email, contrasena} = user;
+        const sql = `SELECT id, nombre, contrasena, rol FROM usuarios WHERE email = ?;`
+        const [usuario] = await connection.query(sql, [email, contrasena]);
+        
+        const [fincasResult] = await connection.query(
+            `SELECT finca_id from usuario_finca WHERE usuario_id = ?;`, [usuario[0].id]
+        );
+        const fincas = fincasResult.map(row => row.finca_id);
+        usuario[0].fincas = fincas;
+        //console.log(usuario[0])
+        return usuario[0];
+    }
 
     static async getByEmail({user}) {
         const {email, contrasena} = user;
@@ -118,12 +144,12 @@ export class userModel {
         try {
             
             // Consulta para obtener las fincas asociadas al usuario
-           //const [fincas] = await connection.query(
-           //    `SELECT f.*
-           //     FROM finca f
-           //     JOIN usuario_finca uf ON f.id = uf.finca_id
-           //     WHERE uf.usuario_id = ?;`, [id]
-           //);
+           const [fincas] = await connection.query(
+               `SELECT f.*
+                FROM finca f
+                JOIN usuario_finca uf ON f.id = uf.finca_id
+                WHERE uf.usuario_id = ?;`, [id]
+           );
     
             // Consulta para obtener la información del usuario
             const [user] = await connection.query(
@@ -135,7 +161,7 @@ export class userModel {
             // Retorna ambos resultados como un objeto
             return {
                 user: user[0],  // Devolver solo el primer registro (suponiendo ID es único)
-                //fincas         // Devolver todas las fincas asociadas
+                fincas         // Devolver todas las fincas asociadas
             };
         } catch (error) {
             console.error('Error executing queries:', error);

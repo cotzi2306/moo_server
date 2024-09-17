@@ -1,12 +1,11 @@
 import express from 'express';
 import cors from 'cors';
-import jwt from 'jsonwebtoken';
-
 
 import { createBovinosRouter } from './routes/bovinos.js';
 import { createUsersRouter } from './routes/users.js';
 import { createFincasRouter} from './routes/fincas.js';
 import { createAuthRouter } from './routes/auth.js';
+import cookieParser from 'cookie-parser';
 
 
 const corsOptions = {
@@ -20,6 +19,7 @@ export const createApp = ({bovinoModel, userModel, fincaModel }) => {
     app.use(express.json());
     app.use(cors(corsOptions));
     app.disable('x-powered-by');
+    app.use(cookieParser());
 
     //Obtener información del usuario
 //app.get("/users/:id", async (req, res) =>{

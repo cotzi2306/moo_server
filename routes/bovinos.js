@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { bovinosController } from "../controllers/bovinos.js";
+import authenticateToken from "../middlewares/authMiddleware.js";
 
 
 export const createBovinosRouter = ({bovinoModel}) => {
@@ -7,9 +8,9 @@ export const createBovinosRouter = ({bovinoModel}) => {
 
     const BovinosController = new bovinosController ({bovinoModel})
 
-    bovinosRouter.get('/:id', BovinosController.getBovinobyId);
+    bovinosRouter.get('/:id', authenticateToken, BovinosController.getBovinobyId);
 
-    bovinosRouter.post('/',  BovinosController.addBovino);
+    bovinosRouter.post('/',  authenticateToken, BovinosController.addBovino);
 
     bovinosRouter.patch('/:id', BovinosController.updateBovino);
 

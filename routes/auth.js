@@ -10,6 +10,8 @@ export const createAuthRouter = ({userModel}) => {
 
     authRouter.post("/login", AuthController.login);
 
+    authRouter.post("/logout", AuthController.logout);
+
     //authRouter.post("/signup", AuthController.signup)
 
     return authRouter

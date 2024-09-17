@@ -1,0 +1,69 @@
+### Iniciar sesión
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "juan.puliperez@example.com",
+  "contrasena" : "contrasena"
+}
+
+### Cerrar sesión
+POST http://localhost:8080/auth/logout
+
+### Perfil del usuario autenticado 
+GET http://localhost:8080/users/profile
+
+### Fincas del usuario autenticado 
+GET http://localhost:8080/users/fincas
+
+### Finca especifica del usuario autenticado 
+GET http://localhost:8080/fincas/13
+
+### Bovinos de una finca del usuario
+GET http://localhost:8080/fincas/5/bovinos
+
+### Editar una finca
+PATCH  http://localhost:8080/fincas/3
+Content-Type: application/json
+
+{
+  "nombre" : "Finca El Rosal"
+}
+
+### Agregar finca
+POST http://localhost:8080/fincas
+Content-Type: application/json
+
+{
+  "nombre": "Finca El Trecho",
+  "pais": "Colombia",
+  "estado_departamento": "Antioquia"
+} 
+
+### Eliminar una finca
+DELETE http://localhost:8080/fincas/11
+
+### Ver bovino perteneciente a un usuario
+GET http://localhost:8080/bovinos/4
+
+###Agregar un bovino
+POST http://localhost:8080/bovinos
+Content-Type: application/json
+
+{
+  "finca_id": 2,
+  "numero": "BOV3320",
+  "nombre": "bovinotry",
+  "fecha_nacimiento": "2023-03-15",
+  "raza": "Angus",
+  "procedencia": "Finca El Paraíso",
+  "sexo": "hembra",
+  "proposito": "carne",
+  "peso": 500,
+  "ciclo_de_vida": "ternero",
+  "isAlive": true,
+  "sql": "SELECT * FROM usuarios;"
+}
+
+
+

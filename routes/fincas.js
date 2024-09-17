@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { fincasController } from "../controllers/finca.js";
+import authenticateToken from "../middlewares/authMiddleware.js";
 
 
 export const createFincasRouter = ({fincaModel}) => {
@@ -7,13 +8,15 @@ export const createFincasRouter = ({fincaModel}) => {
 
     const FincasController = new fincasController ({fincaModel})
 
-    fincasRouter.get("/:id", FincasController.getFinca);
+    fincasRouter.get("/:id", authenticateToken, FincasController.getFinca);
 
-    fincasRouter.patch("/:id", FincasController.updateFinca)
+    fincasRouter.patch("/:id", authenticateToken, FincasController.updateFinca)
 
-    fincasRouter.get("/:id/bovinos", FincasController.getBovinosFinca);
+    fincasRouter.get("/:id/bovinos", authenticateToken, FincasController.getBovinosFinca);
 
-    fincasRouter.post("/", FincasController.addFinca);
+    fincasRouter.post("/", authenticateToken, FincasController.addFinca);
+
+    fincasRouter.delete("/:id", authenticateToken, FincasController.deleteFinca);
 
     return fincasRouter
 }

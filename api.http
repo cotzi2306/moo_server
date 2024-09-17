@@ -14,13 +14,13 @@ GET http://localhost:8080/users/1/notifications/{notificationId}
 GET http://localhost:8080/users/1/fincas
 
 ### Obtener información de una finca
-GET http://localhost:8080/fincas/7
+GET http://localhost:8080/fincas/4
 
 ###Obtener información de los bovinos de una finca 
 GET http://localhost:8080/fincas/1/bovinos
 
 ###Obtener información de un bovino 
-GET http://localhost:8080/bovinos/13
+GET http://localhost:8080/bovinos/4
 
 ###Obtener información de los partos de un bovino
 GET http://localhost:8080/bovinos/1/births
@@ -75,7 +75,7 @@ Content-Type: application/json
   "estado_departamento": "Antioquia"
 } 
 
-### Editar un bovino
+### Editar una finca
 PATCH  http://localhost:8080/fincas/8
 Content-Type: application/json
 
@@ -88,8 +88,8 @@ POST http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "nombre": "Juan Pérez",
-  "email": "juan.prperez@example.com",
+  "nombre": "Juan Pulido",
+  "email": "juan.nose@example.com",
   "numero_telefonico": "3001234567",
   "contrasena" : "contrasena",
   "no_identificacion": "123456789",
@@ -113,6 +113,9 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "email": "juan.prperez@example.com",
-  "contrasena" : "contrasena"
+  "email": "julianh@example.com",
+  "contrasena" : "hashed_password"
 }
+
+### Información del usuario autenticado 
+GET http://localhost:8080/users/profile

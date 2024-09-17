@@ -98,4 +98,6 @@ SELECT * FROM finca;
 SELECT * FROM usuario_finca;
 SELECT * FROM Bovinos;
 
+SELECT finca_id  from usuario_finca WHERE usuario_id = ?;
+
 
