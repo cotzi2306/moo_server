@@ -9,7 +9,7 @@ import cookieParser from 'cookie-parser';
 
 
 const corsOptions = {
-    origin: "http://localhost:8081",
+    origin: ["http://192.168.1.68:8081", "http://192.168.1.69:8081", "http://localhost:8081"],
     methods: ["POST", "GET", "PATCH", "DELETE"],
     credentials: true,
 }

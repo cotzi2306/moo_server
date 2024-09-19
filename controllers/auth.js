@@ -40,7 +40,8 @@ export class authController {
             }, "secretkey", { expiresIn: '1h' });
             
             return res.cookie('access_token', token, {
-                 httpOnly: true, path: '/'
+                 httpOnly: true, 
+                 path: '/'
              }).status(200).send({
                  message: 'Autorizado',
                  token: token, 

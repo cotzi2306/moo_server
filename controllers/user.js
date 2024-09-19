@@ -34,6 +34,8 @@ export class usersController {
 
     getProfile = async (req, res) => {
         const {id} = req.user;
+        const token = req.cookies;
+        console.log(token);
         const profile = await this.userModel.getUser({id});
         res.status(200).send(profile);
     }

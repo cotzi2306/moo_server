@@ -88,13 +88,13 @@ POST http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "nombre": "Juan Pulido",
-  "email": "juan.nose@example.com",
+  "nombre": "Benito Juarez",
+  "email": "benitoj@example.com",
   "numero_telefonico": "3001234567",
   "contrasena" : "contrasena",
   "no_identificacion": "123456789",
-  "ubicacion": "Medellín",
-  "rol" : "Usuario",
+  "ubicacion": "Cali",
+  "rol" : "Admin",
   "puesto": "Propietario"
   
 }

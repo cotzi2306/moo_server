@@ -25,7 +25,7 @@ export class bovinoModel {
         const sql = ` 
             INSERT INTO Bovinos (finca_id, numero, nombre, fecha_nacimiento, raza, id_papa, id_mama, procedencia, sexo, proposito, peso, ciclo_de_vida, isAlive)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-    
+
         const [result] = await connection.query(sql, [ finca_id, numero, nombre, fecha_nacimiento, raza, id_papa, id_mama, procedencia, sexo, proposito, peso, ciclo_de_vida, isAlive]);
     
         return result.insertId; //devuelve el id del bovino creado
@@ -122,13 +122,15 @@ export class userModel {
         const {email, contrasena} = user;
         const sql = `SELECT id, nombre, contrasena, rol FROM usuarios WHERE email = ?;`
         const [usuario] = await connection.query(sql, [email, contrasena]);
+        if (usuario[0]) {
+            const [fincasResult] = await connection.query(
+                `SELECT finca_id from usuario_finca WHERE usuario_id = ?;`, [usuario[0].id]
+            );
+            const fincas = fincasResult.map(row => row.finca_id);
+            usuario[0].fincas = fincas;
+            console.log(usuario[0])
+        }
         
-        const [fincasResult] = await connection.query(
-            `SELECT finca_id from usuario_finca WHERE usuario_id = ?;`, [usuario[0].id]
-        );
-        const fincas = fincasResult.map(row => row.finca_id);
-        usuario[0].fincas = fincas;
-        //console.log(usuario[0])
         return usuario[0];
     }
 
@@ -144,12 +146,12 @@ export class userModel {
         try {
             
             // Consulta para obtener las fincas asociadas al usuario
-           const [fincas] = await connection.query(
-               `SELECT f.*
-                FROM finca f
-                JOIN usuario_finca uf ON f.id = uf.finca_id
-                WHERE uf.usuario_id = ?;`, [id]
-           );
+           //const [fincas] = await connection.query(
+           //    `SELECT f.*
+           //     FROM finca f
+           //     JOIN usuario_finca uf ON f.id = uf.finca_id
+           //     WHERE uf.usuario_id = ?;`, [id]
+           //);
     
             // Consulta para obtener la información del usuario
             const [user] = await connection.query(
@@ -157,12 +159,11 @@ export class userModel {
                  FROM usuarios
                  WHERE id = ?;`, [id]
             );
-    
+           
             // Retorna ambos resultados como un objeto
-            return {
-                user: user[0],  // Devolver solo el primer registro (suponiendo ID es único)
-                fincas         // Devolver todas las fincas asociadas
-            };
+            return user[0]  // Devolver solo el primer registro (suponiendo ID es único)
+                //fincas         // Devolver todas las fincas asociadas
+            
         } catch (error) {
             console.error('Error executing queries:', error);
             throw error;

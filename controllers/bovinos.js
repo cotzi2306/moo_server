@@ -28,9 +28,15 @@ export class bovinosController {
         if (!user.fincas.includes(parseInt(result.data.finca_id))) {
             return res.status(401).json({ message: 'No autorizado' });
         }
-    
-        const newBovino = await this.bovinoModel.addBovino({bovino: result.data});
-        res.status(201).json({ newBovino , message: 'Bovino agregado exitosamente' });
+
+        try {
+            const newBovino = await this.bovinoModel.addBovino({bovino: result.data});
+            res.status(201).json({ newBovino , message: 'Bovino agregado exitosamente' });
+        }
+        catch (error) {
+            console.error('Error en el controlador al agregar bovino:', error.message);
+            res.status(500).json({ message: 'Error interno del servidor. Por favor, inténtelo de nuevo más tarde.' });
+        }
     }
 
     updateBovino = async (req, res) => {

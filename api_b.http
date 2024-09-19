@@ -3,7 +3,7 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "email": "juan.puliperez@example.com",
+  "email": "benitoj@example.com",
   "contrasena" : "contrasena"
 }
 
@@ -17,10 +17,10 @@ GET http://localhost:8080/users/profile
 GET http://localhost:8080/users/fincas
 
 ### Finca especifica del usuario autenticado 
-GET http://localhost:8080/fincas/13
+GET http://localhost:8080/fincas/11
 
 ### Bovinos de una finca del usuario
-GET http://localhost:8080/fincas/5/bovinos
+GET http://localhost:8080/fincas/10/bovinos
 
 ### Editar una finca
 PATCH  http://localhost:8080/fincas/3
@@ -35,7 +35,7 @@ POST http://localhost:8080/fincas
 Content-Type: application/json
 
 {
-  "nombre": "Finca El Trecho",
+  "nombre": "Finca Hacienda Napoles",
   "pais": "Colombia",
   "estado_departamento": "Antioquia"
 } 
@@ -44,16 +44,16 @@ Content-Type: application/json
 DELETE http://localhost:8080/fincas/11
 
 ### Ver bovino perteneciente a un usuario
-GET http://localhost:8080/bovinos/4
+GET http://localhost:8080/bovinos/2
 
 ###Agregar un bovino
 POST http://localhost:8080/bovinos
 Content-Type: application/json
 
 {
-  "finca_id": 2,
-  "numero": "BOV3320",
-  "nombre": "bovinotry",
+  "finca_id": 9,
+  "numero": "BOV3323",
+  "nombre": "bovino2-9",
   "fecha_nacimiento": "2023-03-15",
   "raza": "Angus",
   "procedencia": "Finca El Paraíso",
