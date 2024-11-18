@@ -3,12 +3,49 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "email": "benitoj@example.com",
-  "contrasena" : "contrasena"
+  "email": "prop3@example.com",
+  "contrasena" : "banana"
 }
 
 ### Cerrar sesión
 POST http://localhost:8080/auth/logout
+
+### Agregar usuario
+POST http://localhost:8080/auth/signup
+Content-Type: application/json
+
+{
+  "nombre": "propietario 3",
+  "email": "prop3@example.com",
+  "contrasena" : "password",
+  "numero_telefonico": "2461568789"
+}
+
+### Reset password
+POST http://localhost:8080/auth/reset-password
+Content-Type: application/json
+
+{
+  "email": "prop3@example.com"
+}
+
+###Set new password
+POST http://localhost:8080/auth/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksImlhdCI6MTczMTAzMTQxMiwiZXhwIjoxNzMxMDM1MDEyfQ.lb-Sf3p9GNpjl3n-4HGxYZ9zkA6ywDT0YHNpsC935N4
+Content-Type: application/json
+
+{
+  "newPassword": "banana"
+}
+
+### Completar perfil
+PUT http://localhost:8080/users/profile
+Content-Type: application/json
+
+{
+  "no_identificacion" : "1006646659",
+  "ubicacion" : "Bogotá",
+  "nombre" : "Propietario Terco" 
+}
 
 ### Perfil del usuario autenticado 
 GET http://localhost:8080/users/profile
@@ -17,13 +54,13 @@ GET http://localhost:8080/users/profile
 GET http://localhost:8080/users/fincas
 
 ### Finca especifica del usuario autenticado 
-GET http://localhost:8080/fincas/11
+GET http://localhost:8080/fincas/4
 
 ### Bovinos de una finca del usuario
-GET http://localhost:8080/fincas/10/bovinos
+GET http://localhost:8080/fincas/4/bovinos
 
 ### Editar una finca
-PATCH  http://localhost:8080/fincas/3
+PATCH  http://localhost:8080/fincas/2
 Content-Type: application/json
 
 {
@@ -41,29 +78,61 @@ Content-Type: application/json
 } 
 
 ### Eliminar una finca
-DELETE http://localhost:8080/fincas/11
+DELETE http://localhost:8080/fincas/3
 
 ### Ver bovino perteneciente a un usuario
-GET http://localhost:8080/bovinos/2
+GET http://localhost:8080/bovinos/7
 
 ###Agregar un bovino
 POST http://localhost:8080/bovinos
 Content-Type: application/json
 
 {
-  "finca_id": 9,
-  "numero": "BOV3323",
-  "nombre": "bovino2-9",
-  "fecha_nacimiento": "2023-03-15",
+  "finca_id": 4,
+  "numero": "BOV3324",
+  "nombre": "Fernando",
+  "fecha_nacimiento": "2024-01-02" ,
+  "estado": "Vivo",
   "raza": "Angus",
-  "procedencia": "Finca El Paraíso",
-  "sexo": "hembra",
-  "proposito": "carne",
-  "peso": 500,
-  "ciclo_de_vida": "ternero",
-  "isAlive": true,
+  "procedencia": "Finca El Manzano",
+  "sexo": "Macho",
+  "proposito": "Pajillas",
+  "peso": 550,
+  "etapa_vida": "Adulto",
+  "estado_salud": "Sano",
+  "estado_reproductivo": "Ovulando",
   "sql": "SELECT * FROM usuarios;"
 }
 
+### Actualizar bovino
+PATCH http://localhost:8080/bovinos/7
+Content-Type: application/json
+
+{
+  "etapa_vida": "Adulto",
+  "estado_salud": "Sanito",
+  "estado_reproductivo": "Vacío",
+  "id_padre" : 1,
+  "id_madre" : 2
+}
+
+###Eliminar bovino
+DELETE http://localhost:8080/bovinos/8
 
 
+### Iniciar sesión
+POST http://192.168.1.71:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "benitoj@example.com",
+  "contrasena" : "contrasena"
+}
+
+### Prueba ver perfil
+http://192.168.1.71:8080/users/profile
+
+### Fincas del usuario autenticado 
+GET http://192.168.1.71:8080/users/fincas
+### fINCA
+GET http://192.168.1.71:8080/fincas/9

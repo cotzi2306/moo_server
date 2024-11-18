@@ -1,4 +1,4 @@
-import { string, z } from "zod";
+import { z } from "zod";
 
 const fincaSchema = z.object({
     nombre: z.string ({

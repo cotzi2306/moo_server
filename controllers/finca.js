@@ -3,9 +3,9 @@ import { validateFinca, validatePartialFinca } from "../schemas/fincas.js";
 import jwt from 'jsonwebtoken';
 
 export class fincasController {
-constructor ({fincaModel}){
-    this.fincaModel = fincaModel
-}
+    constructor ({fincaModel}){
+        this.fincaModel = fincaModel
+    }
 
     getFinca = async (req, res) => {
         const { id } = req.params;

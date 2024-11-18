@@ -8,17 +8,22 @@ export const createUsersRouter = ({userModel}) => {
     
 
     const UsersController = new usersController ({userModel})
-    //const AuthController = new authController({userModel})
+    //const AuthController = new authController({userModel}) 
 
     //usersRouter.get('/:id', UsersController.getUser);
 
     //usersRouter.get("/:id/fincas", UsersController.getFincasUser);
 
-    usersRouter.post("/", UsersController.addUser);
+    //usersRouter.post("/", UsersController.addUser);
 
     usersRouter.get("/profile", authenticateToken, UsersController.getProfile);
 
     usersRouter.get("/fincas", authenticateToken, UsersController.getFincasUser);
+
+    usersRouter.put("/profile", authenticateToken, UsersController.updateProfile); //completar o actualizar perfil
+
+    //Eliminar usuario  
+    //Actualizar foto de perfil
 
     return usersRouter
 }
